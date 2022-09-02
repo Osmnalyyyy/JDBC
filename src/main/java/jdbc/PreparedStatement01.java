@@ -13,13 +13,13 @@ public class PreparedStatement01 {
         // 1 . adım prepared statement querry olustur
         String sql1 = "UPDATE companies SET number_of_employees=? WHERE company= ? ";
         // 2. adım PrepareStatement objesini oluştur
-        PreparedStatement preparedStatement1 = con.prepareStatement(sql1);
+        PreparedStatement ps1 = con.prepareStatement(sql1);
 
         // 3. adım set...() methodları ile soru işaretleri için değer gir
-        preparedStatement1.setInt(1, 9999);
-        preparedStatement1.setString(2, "IBM");
+        ps1.setInt(1, 9999);
+        ps1.setString(2, "IBM");
         // 4. adım EXEcute query
-        int updateRowSayisi = preparedStatement1.executeUpdate();
+        int updateRowSayisi = ps1.executeUpdate();
         System.out.println(updateRowSayisi + " satir guncellendi.");
         String sql2 = "select * from companies";
         ResultSet result1 = st.executeQuery(sql2);
@@ -27,27 +27,42 @@ public class PreparedStatement01 {
             System.out.println(result1.getInt(1) + " " + result1.getString(2) + " " + result1.getInt(3));
         }
         //   Google icin değişiklik
-        preparedStatement1.setInt(1, 15000);
-        preparedStatement1.setString(2, "GOOGLE");
+        ps1.setInt(1, 15000);
+        ps1.setString(2, "GOOGLE");
 
-        int updateRowSayisi1 = preparedStatement1.executeUpdate();
+        int updateRowSayisi1 = ps1.executeUpdate();
         System.out.println(updateRowSayisi1 + " satir guncellendi.");
         String sql3 = "select * from companies";
         ResultSet result2 = st.executeQuery(sql3);
         while (result2.next()) {
             System.out.println(result2.getInt(1) + " " + result2.getString(2) + " " + result2.getInt(3));
         }
+        System.out.println();
+        //    //2. Örnek: "SELECT * FROM <table name>" query'sini prepared statement ile kullanın.
+        read_data(con,"companies" );
 
-        //2. Örnek: "SELECT * FROM <table name>" query'sini prepared statement ile kullanın.
-        String sql4 = "SELECT * FROM ?";
-        PreparedStatement preparedStatement2 = con.prepareStatement(sql4);
-        preparedStatement2.setString(1, "companies");
+        con.close();
+        st.close();
+    }
 
-        ResultSet result4 = preparedStatement2.executeQuery(sql4);
-        while (result4.next()) {
-            System.out.println(result4.getInt(1) + " " + result4.getString(2) + " " + result4.getInt(3));
+    // bir tablonun istenilen datasını prepared satetement ile cagırmak icin kullanılan method
+    public static void read_data(Connection con, String tableName) {
+        try {
+            String query = String.format("SELECT * FROM %s", tableName);// format() methodu dinamik String olusturmak icin kullanılır
 
+            Statement statement = con.createStatement();
+            // SQL query yi calistir
+            ResultSet result = statement.executeQuery(query);// datayı cagırıp ResultSet konteynırına koyduk
+
+            while (result.next()) {// tum datayı cagiralim
+                System.out.println(result.getInt(1) + " " + result.getString(2) + " " + result.getInt(3));
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
         }
 
     }
+
+
 }
