@@ -24,7 +24,7 @@ public class Execute01 {
         //3.Example: Drop workers table
         String sql3 = "DROP TABLE workers";
        st.execute(sql3);
-        // 5. adım bağlantı ve statementi kapat
+        // 4. adım bağlantı ve statementi kapat
         con.close();
         st.close();
 
