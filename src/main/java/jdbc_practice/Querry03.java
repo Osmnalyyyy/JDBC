@@ -1,4 +1,4 @@
-package jdbc_practice_day1;
+package jdbc_practice;
 
 import java.sql.*;
 
@@ -8,6 +8,7 @@ public class Querry03 {
         Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Techpro", "postgres", "8520456");
         // Statement st = con.createStatement();
         PreparedStatement ps = con.prepareStatement("select * from ogrenciler ogrenciler");
+        //PreparedStatement--->>>>> statemente gore daha dinamiktir ve hafızada daha az yer kaplar , daha güvenli
         ResultSet rs = ps.executeQuery();
 
         ResultSetMetaData rsmd = rs.getMetaData();// DB e fazla yuk binmez farklı veriler de alınabilir
@@ -22,6 +23,11 @@ public class Querry03 {
         System.out.println("4. sutunun data tipi : " + rsmd.getColumnTypeName(4));
 
         System.out.println("Tablo ismi : "+rsmd.getTableName(4));
+
+
+        con.close();
+        ps.close();
+
 
     }
 }

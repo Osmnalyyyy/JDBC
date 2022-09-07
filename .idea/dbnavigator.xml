@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DataExportManager">
@@ -30,7 +30,8 @@
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="ebeee6e7-9557-475d-bbfe-02dd92a8dffa">
       <console name="Connection" type="STANDARD" schema="public" session="Main"><![CDATA[select * from ogrenciler;
-select * from ogrenciler where cinsiyet='E';]]></console>
+select * from ogrenciler where cinsiyet='E';
+delete from ogrenciler where ogrenci_ismi='Sena Can';]]></console>
     </connection>
     <connection id="8615b424-b341-47ca-941c-083d94c46266">
       <console name="Connection 1" type="STANDARD" schema="information_schema" session="Main" />

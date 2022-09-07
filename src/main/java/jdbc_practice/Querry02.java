@@ -1,4 +1,4 @@
-package jdbc_practice_day1;
+package jdbc_practice;
 
 import java.sql.*;
 
